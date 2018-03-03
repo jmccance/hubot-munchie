@@ -4,6 +4,10 @@
   "author": "jmccance",
   "license": "MIT",
   "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jmccance/hubot-munchie.git"
+  },
   "dependencies": {
     "aws-sdk": "^2.205.0",
     "axios": "^0.18.0"
@@ -17,6 +21,6 @@
   "scripts": {
     "build": "yarn run tsc",
     "bot": "yarn run build && yarn run hubot -n b",
-    "prepublish": "yarn build"
+    "prepare": "yarn build"
   }
 }
