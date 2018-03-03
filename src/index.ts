@@ -14,28 +14,33 @@ const foursquare = new Foursquare(config)
 
 export = function (robot: Hubot.Robot): void {
   robot.respond(/(.*)/, async (res: Hubot.Response) => {
-    const lexResponse = await lex.postText({
-      botName: config.botName,
-      botAlias: config.botAlias,
-      userId: `hubot-${res.message.user.id}`,
-      inputText: res.match[1],
-    }).promise()
+    try {
+      const lexResponse = await lex.postText({
+        botName: config.botName,
+        botAlias: config.botAlias,
+        userId: `hubot-${res.message.user.id}`,
+        inputText: res.match[1],
+      }).promise()
 
-    if (lexResponse.intentName === 'WhereCanIGetLunch') {
-      const resp = 
-        await foursquare.exploreVenues({
-          query: 'quick lunch',
-          latitude: config.latitude,
-          longitude: config.longitude,
-          openNow: true,
-        })
+      if (lexResponse.intentName === 'WhereCanIGetLunch') {
+        const resp =
+          await foursquare.exploreVenues({
+            query: 'quick lunch',
+            latitude: config.latitude,
+            longitude: config.longitude,
+            openNow: true,
+          })
 
-      const recommendations = 
-        resp.response.groups[0].items.map((i) => i.venue.name)
+        const recommendations =
+          resp.response.groups[0].items.map((i) => i.venue.name)
 
-      const recommendation = res.random(recommendations)
+        const recommendation = res.random(recommendations)
 
-      res.reply(`How about ${recommendation}?`)
+        res.reply(`How about ${recommendation}?`)
+      }
+    } catch (err) {
+      res.reply("Sorry, I'm having trouble remembering what's around.")
+      console.log(err);
     }
   })
 }

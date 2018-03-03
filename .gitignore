@@ -1,3 +1,5 @@
 .hubot_history
 node_modules
-dist
+scripts
+yarn-error.log
+secrets.sh
