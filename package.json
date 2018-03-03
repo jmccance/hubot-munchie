@@ -21,6 +21,6 @@
   "scripts": {
     "build": "yarn run tsc",
     "bot": "yarn run build && yarn run hubot -n b",
-    "prepare": "yarn build"
+    "install": "yarn build"
   }
 }
