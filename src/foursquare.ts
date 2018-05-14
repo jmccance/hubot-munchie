@@ -20,7 +20,8 @@ export class Foursquare {
           ll: `${req.latitude},${req.longitude}`,
           query: req.query,
           v: '20170801',
-          openNow: req.openNow ? 1 : null
+          openNow: req.openNow ? 1 : null,
+          limit: req.limit
         }
       }
     )
@@ -39,7 +40,9 @@ export namespace Foursquare {
     latitude: number,
     longitude: number,
     query: string,
-    openNow: boolean
+    openNow: boolean,
+    limit?: number,
+    radius?: number
   }
 
   export interface ExploreVenuesResponse {

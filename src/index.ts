@@ -29,6 +29,8 @@ export = function (robot: Hubot.Robot): void {
             latitude: config.latitude,
             longitude: config.longitude,
             openNow: true,
+            limit: 50,
+            radius: 1000
           })
 
         const recommendations =
